@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
-export class CreateNoteDto {
+export class CreateBookDto {
   @ApiProperty({
-    description: 'The title of the note',
-    example: 'Shopping List',
+    description: 'The title of the book',
+    example: 'Cien años de soledad',
     maxLength: 200,
   })
   @IsString()
@@ -13,20 +13,22 @@ export class CreateNoteDto {
   title!: string;
 
   @ApiProperty({
-    description: 'The full content of the note',
-    example: 'Buy milk, eggs, and bread',
+    description: 'The author of the book',
+    example: 'Gabriel García Márquez',
+    maxLength: 200,
   })
   @IsString()
   @IsNotEmpty()
-  content!: string;
+  @MaxLength(200)
+  author!: string;
 
   @ApiProperty({
-    description: 'Whether the note is archived',
+    description: 'Whether the book has been read',
     example: false,
     default: false,
     required: false,
   })
   @IsBoolean()
   @IsOptional()
-  isArchived?: boolean;
+  isRead?: boolean;
 }

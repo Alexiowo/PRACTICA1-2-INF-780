@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Note } from '../notes/entities/note.entity';
+import { Book } from '../books/entities/book.entity';
 
 export function databaseConfig(configService: ConfigService): TypeOrmModuleOptions {
   const nodeEnv = configService.get<string>('NODE_ENV', 'development');
@@ -12,7 +12,7 @@ export function databaseConfig(configService: ConfigService): TypeOrmModuleOptio
     username: configService.get<string>('DB_USER'),
     password: configService.get<string>('DB_PASSWORD'),
     database: configService.get<string>('DB_NAME'),
-    entities: [Note],
+    entities: [Book],
     synchronize: nodeEnv !== 'production',
     logging: nodeEnv === 'development',
   };

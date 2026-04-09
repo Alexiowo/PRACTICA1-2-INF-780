@@ -9,6 +9,7 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
+  // Validaciones globales
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -18,19 +19,22 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
+  // Filtros e interceptores globales
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
 
+  // Configuración de Swagger
   const config = new DocumentBuilder()
-    .setTitle('Notes API')
-    .setDescription('REST API for managing notes built with NestJS and PostgreSQL')
+    .setTitle('Books API')
+    .setDescription('REST API for managing books built with NestJS and PostgreSQL')
     .setVersion('1.0')
-    .addTag('notes')
+    .addTag('books')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
+  // Configuración de puerto
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT', 3000);
 

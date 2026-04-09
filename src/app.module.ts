@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { databaseConfig } from './config/database.config';
-import { NotesModule } from './notes/notes.module';
+import { BooksModule } from './books/books.module';
 
 @Module({
   imports: [
@@ -23,7 +23,7 @@ import { NotesModule } from './notes/notes.module';
       inject: [ConfigService],
       useFactory: databaseConfig,
     }),
-    NotesModule,
+    BooksModule,
   ],
 })
 export class AppModule {}

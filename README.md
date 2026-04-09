@@ -1,127 +1,57 @@
-# Notes API DB
 
-REST API para gestión de notas, construida con **NestJS**, **TypeORM** y **PostgreSQL**.
+## DESCRIPCIÓN DEL PROYECTO 
 
-## Descripción
+API que permite crear, leer, actualizar y eliminar libros (CRUD completo), con persistencia en base de datos PostgreSQL.  
+Incluye validaciones, documentación con Swagger, pruebas unitarias y pruebas de integración (e2e).
 
-API que permite crear, leer, actualizar y eliminar notas (CRUD completo), con persistencia en base de datos PostgreSQL.
+## INSTRUCCIONES DE INSTALACIÓN 
 
-## Tecnologías
+# Instalar el CLI globalmente 
+npm install -g @nestjs/cli 
+  
+# Crear el proyecto 
+nest new BooksApiDb
+  
+# Entrar al directorio 
+cd BooksApiDb
 
-- [NestJS](https://nestjs.com/) v10
-- [TypeORM](https://typeorm.io/) v0.3
-- [PostgreSQL](https://www.postgresql.org/)
-- [Swagger](https://swagger.io/) (documentación de la API)
-- [class-validator](https://github.com/typestack/class-validator) (validación de DTOs)
+# instalar las dependencias de ser necesario
+npm install uuid class-validator class-transformer 
+npm install --save-dev @types/uuid
 
-## Requisitos previos
 
-- Node.js >= 18
-- PostgreSQL en ejecución
-- npm
+## COMO EJECUTAR LA APLICACIÓN 
+para modo desarrollo debe ser:**"npm run start:dev"**
+para modo producción debe ser:**"npm run start"**
+ LA APLICACION ESTA DISPONIBLE EN:**"http://localhost:3000"**
 
-## Configuración
+## EN THUNDER: 
+## POST 
+http://localhost:3000/books (POST)
+{
+  "title": "El Principito",
+  "author": "Antoine de Saint-Exupéry"
+}
+## GET
+http://localhost:3000/books (GET)
+http://localhost:3000/books/<id> (GET)
 
-1. Copia el archivo de variables de entorno:
+## PATCH 
+http://localhost:3000/books/<id> (PATCH)
+(reemplazar el  <id> por el id que devolvió el POST).
 
-```bash
-cp .env.example .env
-```
+## DELETE 
+http://localhost:3000/books/<id> (DELETE)
+MUESTRA que la respuesta es vacía (204 No Content).
 
-2. Edita `.env` con tus credenciales de base de datos:
 
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=notes_api_db
-PORT=3000
-```
+## COMO EJECUTAR LAS PRUEBAS 
+Pruebas unitarias + cobertura:**"npm run test:cov"**
+Pruebas de integración (e2e):**"npm run test:e2e"**
 
-3. Crea la base de datos en PostgreSQL:
+## URL	de	documentación Swagger
+LA APLICACION ESTA DISPONIBLE EN:**"http://localhost:3000/api/docs"**
 
-```sql
-CREATE DATABASE notes_api_db;
-```
+## Cobertura de pruebas
+La cobertura de pruebas se obtiene con:**"npm run test:cov"**
 
-## Instalación
-
-```bash
-npm install
-```
-
-## Ejecución
-
-```bash
-# Desarrollo (con hot-reload)
-npm run start:dev
-
-# Producción
-npm run build
-npm run start:prod
-```
-
-La API estará disponible en `http://localhost:3000`.
-
-La documentación Swagger estará en `http://localhost:3000/api`.
-
-## Endpoints
-
-| Método | Ruta         | Descripción              |
-|--------|--------------|--------------------------|
-| GET    | /notes       | Listar todas las notas   |
-| GET    | /notes/:id   | Obtener una nota por ID  |
-| POST   | /notes       | Crear una nueva nota     |
-| PATCH  | /notes/:id   | Actualizar una nota      |
-| DELETE | /notes/:id   | Eliminar una nota        |
-
-## Pruebas
-
-```bash
-# Pruebas unitarias
-npm run test
-
-# Pruebas unitarias con cobertura
-npm run test:cov
-
-# Pruebas e2e
-npm run test:e2e
-```
-
-### Configuración para pruebas e2e
-
-Las pruebas e2e requieren una base de datos dedicada y un archivo `.env.test` en la raíz del proyecto. Crea el archivo con el siguiente contenido:
-
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=notes_api_db_test
-NODE_ENV=test
-PORT=3001
-```
-
-Asegúrate de crear también la base de datos de prueba en PostgreSQL:
-
-```sql
-CREATE DATABASE notes_api_db_test;
-```
-
-## Estructura del proyecto
-
-```
-src/
-├── config/          # Configuración de variables de entorno
-├── common/          # Filtros, interceptores y utilidades compartidas
-├── notes/
-│   ├── dto/         # Data Transfer Objects (create, update)
-│   ├── entities/    # Entidad Note (TypeORM)
-│   ├── notes.controller.ts
-│   ├── notes.service.ts
-│   ├── notes.repository.ts
-│   └── notes.module.ts
-├── app.module.ts
-└── main.ts
-```
