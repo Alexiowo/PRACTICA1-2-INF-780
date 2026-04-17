@@ -55,3 +55,14 @@ LA APLICACION ESTA DISPONIBLE EN:**"http://localhost:3000/api/docs"**
 ## Cobertura de pruebas
 La cobertura de pruebas se obtiene con:**"npm run test:cov"**
 
+
+
+## Práctica 2 - E2E Testing
+
+Se añadieron pruebas E2E utilizando test.
+
+Ubicación:
+test/books.e2e-spec.ts
+
+Ejecutar:
+npm run test:e2e
